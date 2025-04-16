@@ -28,8 +28,6 @@
     <app-movie-item
       [movie]="movie"
       appHighlight
-      [isFavorite]="favoritesService.isFavorite(movie)()"
-      (toggleFavorite)="favoritesService.toggleFavorite(movie)"
     >
       <button [routerLink]="'details/' + movie.id">Details</button>
     </app-movie-item>

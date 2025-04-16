@@ -3,18 +3,14 @@ import { Movie } from '../model/movie.model';
 import { MillionDollarPipe } from '../pipes/million-dollar.pipe';
 import { MinToDurationPipe } from '../pipes/min-to-duration.pipe';
 import { RouterLink } from '@angular/router';
-
+import { FavDirective } from '../directives/fav.directive';
 @Component({
   selector: 'app-movie-item',
   template: `
     <div class="movie-item">
       <div>
         <h4>
-          <span
-            class="icon-star"
-            [class.active]="isFavorite()"
-            (click)="toggleFavorite.emit(movie())"
-          ></span>
+          <span class="icon-star" [appFav]="movie()"></span>
           {{ movie().title }}
         </h4>
         <small class="subtitle">
@@ -26,11 +22,9 @@ import { RouterLink } from '@angular/router';
       <ng-content></ng-content>
     </div>
   `,
-  imports: [MillionDollarPipe, MinToDurationPipe],
+  imports: [MillionDollarPipe, MinToDurationPipe, FavDirective],
   styleUrls: ['movie-item.component.scss'],
 })
 export class MovieItemComponent {
   movie = input.required<Movie>();
-  isFavorite = input<boolean>(false);
-  toggleFavorite = output<Movie>();
 }
